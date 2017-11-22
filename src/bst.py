@@ -1,4 +1,5 @@
 """Module for creating binary search tree."""
+import timeit
 
 
 class Node(object):
@@ -111,3 +112,18 @@ class BST(object):
             return -(self.root.right.depth + 1)  # add one to count current node
         elif self.root.left:
             return self.root.left.depth + 1  # add one to count current node
+
+
+if __name__ == '__main__':
+    bst = BST()
+    bst.insert(8)
+    bst.insert(4)
+    bst.insert(12)
+    bst.insert(6)
+    bst.insert(13)
+    bst.insert(11)
+    bst.insert(9)
+    bst.insert(0)
+    bst.insert(3)
+    bst.insert(100)
+    print(timeit.timeit("bst.search(100)", setup="from __main__ import bst"))
