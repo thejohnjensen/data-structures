@@ -135,3 +135,21 @@ def bst():
     from bst import BST
     bst = BST()
     return bst
+
+
+@pytest.fixture()
+def bst_full():
+    """Create a BST fixture with nodes."""
+    from bst import BST
+    bst = BST()
+    bst.insert(8)
+    bst.insert(4)
+    bst.insert(12)
+    bst.insert(6)
+    bst.insert(13)
+    bst.insert(11)
+    bst.insert(9)
+    bst.insert(0)
+    bst.insert(3)
+    bst.insert(100)
+    return bst
