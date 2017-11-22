@@ -141,7 +141,7 @@ The Bellmanford will alert the user of any negative cycles in the graph. However
 **Binary Search Tree**
 The binary search tree is a usefull algorithm for storing data and quickly being able to find it.
 
-`insert(val)`: O(log n)
+`insert(val)`: O(2log n) `since after insert I recursively assign depth values`
 `search(val)`: O(log n)
 `size()`: O(1)
 `depth()`: O(1)
