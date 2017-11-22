@@ -137,3 +137,13 @@ A weighted graph is a graph that has weights assigned to the pointers.  A useful
 The benefit of Dijkstra's shortest path algorithm is its efficiency and time complexity. However it does not report if the graph contains any negative looping paths.
 
 The Bellmanford will alert the user of any negative cycles in the graph. However, this algorithm has a worse time complexity than Dijkstras.
+
+**Binary Search Tree**
+The binary search tree is a usefull algorithm for storing data and quickly being able to find it.
+
+`insert(val)`: O(log n)
+`search(val)`: O(log n)
+`size()`: O(1)
+`depth()`: O(1)
+`contains(val)`: O(log n)
+`balance()`: O(1)
