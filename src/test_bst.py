@@ -112,24 +112,82 @@ def test_depth_root_node(bst_full):
     assert bst_full.depth() == 3
 
 
+def test_depth_root_node_small_tree(bst):
+    """Test that root node keeps track of depth."""
+    bst.insert(8)
+    assert bst.depth() == 0
+    bst.insert(2)
+    assert bst.depth() == 1
+    bst.insert(1)
+    assert bst.depth() == 2
+    assert bst.root.left.depth == 1
+    assert bst.root.left.left.depth == 0
+
+
 def test_depth_root_node_single(bst):
     """Test that root node keeps track of depth."""
     bst.insert(8)
     assert bst.depth() == 0
 
 
-# def test_depth_updates_parent(bst_full):
-#     """Test that root node keeps track of depth on each node."""
-#     assert bst_full.root.depth == 3
-#     # Right Nodes
-#     assert bst_full.root.right.depth == 2
-#     assert bst_full.root.right.right.depth == 1
-#     assert bst_full.root.right.right.right.depth == 0
-#     assert bst_full.root.right.left.depth == 1
-#     assert bst_full.root.right.left.left.depth == 0
+def test_depth_updates_parent(bst_full):
+    """Test that root node keeps track of depth on each node below itself."""
+    assert bst_full.root.depth == 3
+    # Right Nodes
+    assert bst_full.root.right.depth == 2
+    assert bst_full.root.right.right.depth == 1
+    assert bst_full.root.right.right.right.depth == 0
+    assert bst_full.root.right.left.depth == 1
+    assert bst_full.root.right.left.left.depth == 0
 
-#     # Left Nodes
-#     assert bst_full.root.left.depth == 2
-#     assert bst_full.root.left.left.depth == 1
-#     assert bst_full.root.left.right.depth == 1
-#     assert bst_full.root.left.left.right.depth == 0
+    # Left Nodes
+    assert bst_full.root.left.depth == 2
+    assert bst_full.root.left.left.depth == 1
+    assert bst_full.root.left.right.depth == 0
+    assert bst_full.root.left.left.right.depth == 0
+
+
+def test_balanced(bst_full):
+    """Test the balance of full tree is 0."""
+    assert bst_full.balance() == 0
+
+
+def test_balance_empty(bst):
+    """Test the balance of empty tree is error."""
+    with pytest.raises(ValueError):
+        bst.balance()
+
+
+def test_balance_left_only(bst):
+    """Test balance with only left nodes."""
+    bst.insert(8)
+    bst.insert(7)
+    bst.insert(6)
+    bst.insert(5)
+    assert bst.balance() == 3
+
+
+def test_balance_right_only(bst):
+    """Test balance with only right nodes."""
+    bst.insert(8)
+    bst.insert(9)
+    bst.insert(10)
+    bst.insert(11)
+    assert bst.balance() == -3
+
+
+def test_balance_right_and_one_left(bst):
+    """Test balance with one left node."""
+    bst.insert(8)
+    bst.insert(9)
+    bst.insert(10)
+    bst.insert(11)
+    bst.insert(6)
+    assert bst.balance() == -2
+
+
+def test_bst_iterable_on_init():
+    """Test that inits with iterable."""
+    from bst import BST
+    bst = BST([8, 7, 6, 9, 10, 2, 99])
+    assert bst._count == 7
