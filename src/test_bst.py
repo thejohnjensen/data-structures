@@ -234,5 +234,24 @@ def test_bst_pre_order_trav(bst):
 
 
 def test_bst_full_pre_order_trav(bst_full):
-    """Test bst in order trav with full bst."""
+    """Test bst in pre order trav with full bst."""
     assert bst_full.pre_order() == [8, 4, 0, 3, 6, 12, 11, 9, 13, 100]
+
+
+def test_bst_post_order(bst):
+    """Test bst post order."""
+    bst.insert(4)
+    bst.insert(2)
+    bst.insert(1)
+    bst.insert(3)
+    assert bst.post_order() == [1, 3, 2, 4]
+
+
+def test_bst_full_post_order_trav(bst_full):
+    """Test bst in post order trav with full bst."""
+    assert bst_full.post_order() == [3, 0, 6, 4, 9, 11, 100, 13, 12, 8]
+
+
+def test_bst_full_breadth_first_trav(bst_full):
+    """Test for breadth first traversal."""
+    assert bst_full.breadth_first() == [8, 4, 12, 0, 6, 11, 13, 3, 9, 100]

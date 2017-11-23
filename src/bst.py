@@ -136,7 +136,11 @@ class BST(object):
         return nodes
 
     def pre_order(self):
-        """Traversal through bst starting at root and going left."""
+        """
+        Traversal through bst starting at root and going left.
+
+        Pre order looks at the nodes value when it first passes it.
+        """
         nodes = []
         current = self.root
         if current is None:
@@ -153,17 +157,60 @@ class BST(object):
                     return _recur_pre_order(current.right)
                 else:
                     return _recur_pre_order(current.parent)
-            return
         _recur_pre_order(current)
         return nodes
 
     def post_order(self):
-        """."""
-        pass
+        """
+        Traversal through bst starting at root and going left.
+
+        Post order will look at all leaves before looking at sub trees.
+        """
+        nodes = []
+        current = self.root
+        if current is None:
+            raise ValueError("The bst is empty.")
+
+        def _recur_post_order(current):
+            """Recursive helper function for post-order traversal."""
+            if current:
+                if current.left and current.left.val not in nodes:
+                    return _recur_post_order(current.left)
+                elif current.right and current.right.val not in nodes:
+                    return _recur_post_order(current.right)
+                nodes.append(current.val)
+                return _recur_post_order(current.parent)
+        _recur_post_order(current)
+        return nodes
 
     def breadth_first(self):
-        """."""
-        pass
+        """
+        Traversal through bst with breadth first approach.
+
+        Look at each node at current depth before going on to next level.
+        """
+        from que_ import Queue
+        q = Queue()
+        nodes = []
+        q.enqueue(self.root)
+        if self.root is None:
+            raise ValueError("The bst is empty.")
+
+        def _recur_breadth_first():
+            """"Recursive helper function for breadth first."""
+            try:
+                current = q.dequeue()
+                while current:
+                    nodes.append(current.val)
+                    if current.left:
+                        q.enqueue(current.left)
+                    if current.right:
+                        q.enqueue(current.right)
+                    _recur_breadth_first()
+            except IndexError:
+                return
+        _recur_breadth_first()
+        return nodes
 
 
 if __name__ == '__main__':
