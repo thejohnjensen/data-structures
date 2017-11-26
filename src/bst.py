@@ -54,7 +54,7 @@ class BST(object):
 
     def _set_depth(self, current):
         """
-        After each insert this function will update parent nodes with a depth value.
+        After insert this function will update parent nodes with a depth value.
 
         The depth value signifies the depth below the current node.
         """
@@ -107,11 +107,109 @@ class BST(object):
         if self._count == 0:
             raise ValueError("The tree is empty")
         if self.root.right and self.root.left:
-            return self.root.left.depth - self.root.right.depth  # delta does not need + 1
+            return self.root.left.depth - self.root.right.depth
         elif self.root.right:
-            return -(self.root.right.depth + 1)  # add one to count current node
+            return -(self.root.right.depth + 1)
         elif self.root.left:
-            return self.root.left.depth + 1  # add one to count current node
+            return self.root.left.depth + 1
+
+    def in_order(self):
+        """Traverse the left subtree, visit root, then traverse the right."""
+        nodes = []
+        current = self.root
+        if current is None:
+            raise ValueError("The bst is empty.")
+
+        def _recure_in_order(current):
+            """Recursively get tree nodes starting down the left."""
+            if current.left is None or current.left.val in nodes:
+                if current.val not in nodes:
+                    nodes.append(current.val)
+                if current.right and current.right.val not in nodes:
+                    return _recure_in_order(current.right)
+                if current.parent:
+                    return _recure_in_order(current.parent)
+                return
+            return _recure_in_order(current.left)
+
+        _recure_in_order(current)
+        return nodes
+
+    def pre_order(self):
+        """
+        Traversal through bst starting at root and going left.
+
+        Pre order looks at the nodes value when it first passes it.
+        """
+        nodes = []
+        current = self.root
+        if current is None:
+            raise ValueError("The bst is empty.")
+
+        def _recur_pre_order(current):
+            """Recursive helper function for pre-order traversal."""
+            if current:
+                if current.val not in nodes:
+                    nodes.append(current.val)
+                if current.left and current.left.val not in nodes:
+                    return _recur_pre_order(current.left)
+                elif current.right and current.right.val not in nodes:
+                    return _recur_pre_order(current.right)
+                else:
+                    return _recur_pre_order(current.parent)
+        _recur_pre_order(current)
+        return nodes
+
+    def post_order(self):
+        """
+        Traversal through bst starting at root and going left.
+
+        Post order will look at all leaves before looking at sub trees.
+        """
+        nodes = []
+        current = self.root
+        if current is None:
+            raise ValueError("The bst is empty.")
+
+        def _recur_post_order(current):
+            """Recursive helper function for post-order traversal."""
+            if current:
+                if current.left and current.left.val not in nodes:
+                    return _recur_post_order(current.left)
+                elif current.right and current.right.val not in nodes:
+                    return _recur_post_order(current.right)
+                nodes.append(current.val)
+                return _recur_post_order(current.parent)
+        _recur_post_order(current)
+        return nodes
+
+    def breadth_first(self):
+        """
+        Traversal through bst with breadth first approach.
+
+        Look at each node at current depth before going on to next level.
+        """
+        from que_ import Queue
+        q = Queue()
+        nodes = []
+        q.enqueue(self.root)
+        if self.root is None:
+            raise ValueError("The bst is empty.")
+
+        def _recur_breadth_first():
+            """"Recursive helper function for breadth first."""
+            try:
+                current = q.dequeue()
+                nodes.append(current.val)
+                if current.left:
+                    q.enqueue(current.left)
+                if current.right:
+                    q.enqueue(current.right)
+                _recur_breadth_first()
+            except IndexError:
+                return
+        _recur_breadth_first()
+        return nodes
 
 
 if __name__ == '__main__':

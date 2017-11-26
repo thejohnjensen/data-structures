@@ -191,3 +191,75 @@ def test_bst_iterable_on_init():
     from bst import BST
     bst = BST([8, 7, 6, 9, 10, 2, 99])
     assert bst._count == 7
+
+
+def test_bst_in_order_trav_line_left(bst):
+    """Return in order traversal for bst."""
+    bst.insert(8)
+    bst.insert(7)
+    bst.insert(6)
+    assert bst.in_order() == [6, 7, 8]
+
+
+def test_bst_in_order_trav(bst):
+    """Return in order traversal for bst."""
+    bst.insert(8)
+    bst.insert(4)
+    bst.insert(6)
+    bst.insert(2)
+    assert bst.in_order() == [2, 4, 6, 8]
+
+
+def test_bst_full_in_order_trav(bst_full):
+    """Test bst in order trav with full bst."""
+    assert bst_full.in_order() == [0, 3, 4, 6, 8, 9, 11, 12, 13, 100]
+
+
+def test_bst_in_order_trav_only_right(bst):
+    """Return in order traversal for bst with only right nodes."""
+    bst.insert(8)
+    bst.insert(10)
+    bst.insert(12)
+    bst.insert(11)
+    assert bst.in_order() == [8, 10, 11, 12]
+
+
+def test_bst_pre_order_trav(bst):
+    """Test pre order trav."""
+    bst.insert(8)
+    bst.insert(4)
+    bst.insert(6)
+    bst.insert(2)
+    assert bst.pre_order() == [8, 4, 2, 6]
+
+
+def test_bst_full_pre_order_trav(bst_full):
+    """Test bst in pre order trav with full bst."""
+    assert bst_full.pre_order() == [8, 4, 0, 3, 6, 12, 11, 9, 13, 100]
+
+
+def test_bst_post_order(bst):
+    """Test bst post order."""
+    bst.insert(4)
+    bst.insert(2)
+    bst.insert(1)
+    bst.insert(3)
+    assert bst.post_order() == [1, 3, 2, 4]
+
+
+def test_bst_full_post_order_trav(bst_full):
+    """Test bst in post order trav with full bst."""
+    assert bst_full.post_order() == [3, 0, 6, 4, 9, 11, 100, 13, 12, 8]
+
+
+def test_bst_full_breadth_first_trav(bst_full):
+    """Test for breadth first traversal."""
+    assert bst_full.breadth_first() == [8, 4, 12, 0, 6, 11, 13, 3, 9, 100]
+
+
+def test_bst_full_breadth_empty(bst):
+    """Test that proper error is raised with empty bst."""
+    with pytest.raises(ValueError):
+        bst.breadth_first()
+
+
