@@ -255,3 +255,11 @@ def test_bst_full_post_order_trav(bst_full):
 def test_bst_full_breadth_first_trav(bst_full):
     """Test for breadth first traversal."""
     assert bst_full.breadth_first() == [8, 4, 12, 0, 6, 11, 13, 3, 9, 100]
+
+
+def test_bst_full_breadth_empty(bst):
+    """Test that proper error is raised with empty bst."""
+    with pytest.raises(ValueError):
+        bst.breadth_first()
+
+

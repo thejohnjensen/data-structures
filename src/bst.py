@@ -200,13 +200,12 @@ class BST(object):
             """"Recursive helper function for breadth first."""
             try:
                 current = q.dequeue()
-                while current:
-                    nodes.append(current.val)
-                    if current.left:
-                        q.enqueue(current.left)
-                    if current.right:
-                        q.enqueue(current.right)
-                    _recur_breadth_first()
+                nodes.append(current.val)
+                if current.left:
+                    q.enqueue(current.left)
+                if current.right:
+                    q.enqueue(current.right)
+                _recur_breadth_first()
             except IndexError:
                 return
         _recur_breadth_first()
