@@ -120,19 +120,19 @@ class BST(object):
         if current is None:
             raise ValueError("The bst is empty.")
 
-        def _recure_in_order(current):
+        def _recur_in_order(current):
             """Recursively get tree nodes starting down the left."""
             if current.left is None or current.left.val in nodes:
                 if current.val not in nodes:
                     nodes.append(current.val)
                 if current.right and current.right.val not in nodes:
-                    return _recure_in_order(current.right)
+                    _recur_in_order(current.right)
                 if current.parent:
-                    return _recure_in_order(current.parent)
+                    _recur_in_order(current.parent)
                 return
-            return _recure_in_order(current.left)
+            _recur_in_order(current.left)
 
-        _recure_in_order(current)
+        _recur_in_order(current)
         return nodes
 
     def pre_order(self):
