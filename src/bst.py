@@ -135,7 +135,6 @@ class BST(object):
 
         Pre order looks at the nodes value when it first passes it.
         """
-        nodes = []
         current = self.root
         if current is None:
             raise ValueError("The bst is empty.")
@@ -143,16 +142,12 @@ class BST(object):
         def _recur_pre_order(current):
             """Recursive helper function for pre-order traversal."""
             if current:
-                if current.val not in nodes:
-                    nodes.append(current.val)
-                if current.left and current.left.val not in nodes:
-                    return _recur_pre_order(current.left)
-                elif current.right and current.right.val not in nodes:
-                    return _recur_pre_order(current.right)
-                else:
-                    return _recur_pre_order(current.parent)
-        _recur_pre_order(current)
-        return nodes
+                yield current.val
+                for val in _recur_pre_order(current.left):
+                    yield val
+                for val in _recur_pre_order(current.right):
+                    yield val
+        return _recur_pre_order(current)
 
     def post_order(self):
         """
@@ -160,7 +155,6 @@ class BST(object):
 
         Post order will look at all leaves before looking at sub trees.
         """
-        nodes = []
         current = self.root
         if current is None:
             raise ValueError("The bst is empty.")
@@ -168,14 +162,12 @@ class BST(object):
         def _recur_post_order(current):
             """Recursive helper function for post-order traversal."""
             if current:
-                if current.left and current.left.val not in nodes:
-                    return _recur_post_order(current.left)
-                elif current.right and current.right.val not in nodes:
-                    return _recur_post_order(current.right)
-                nodes.append(current.val)
-                return _recur_post_order(current.parent)
-        _recur_post_order(current)
-        return nodes
+                for val in _recur_post_order(current.left):
+                        yield val
+                for val in _recur_post_order(current.right):
+                        yield val
+                yield current.val
+        return _recur_post_order(current)
 
     def breadth_first(self):
         """
@@ -191,7 +183,7 @@ class BST(object):
             raise ValueError("The bst is empty.")
 
         def _recur_breadth_first():
-            """"Recursive helper function for breadth first."""
+            """Recursive helper function for breadth first."""
             try:
                 current = q.dequeue()
                 nodes.append(current.val)
@@ -203,7 +195,8 @@ class BST(object):
             except IndexError:
                 return
         _recur_breadth_first()
-        return nodes
+        for val in nodes:
+            yield val
 
 
 if __name__ == '__main__':

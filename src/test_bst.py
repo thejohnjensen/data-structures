@@ -250,12 +250,22 @@ def test_bst_pre_order_trav(bst):
     bst.insert(4)
     bst.insert(6)
     bst.insert(2)
-    assert bst.pre_order() == [8, 4, 2, 6]
+    nodes = []
+    gen = bst.pre_order()
+    for _ in range(bst.size()):
+        node = next(gen)
+        nodes.append(node)
+    assert nodes == [8, 4, 2, 6]
 
 
 def test_bst_full_pre_order_trav(bst_full):
     """Test bst in pre order trav with full bst."""
-    assert bst_full.pre_order() == [8, 4, 0, 3, 6, 12, 11, 9, 13, 100]
+    nodes = []
+    gen = bst_full.pre_order()
+    for _ in range(bst_full.size()):
+        node = next(gen)
+        nodes.append(node)
+    assert nodes == [8, 4, 0, 3, 6, 12, 11, 9, 13, 100]
 
 
 def test_bst_post_order(bst):
@@ -264,22 +274,32 @@ def test_bst_post_order(bst):
     bst.insert(2)
     bst.insert(1)
     bst.insert(3)
-    assert bst.post_order() == [1, 3, 2, 4]
+    nodes = []
+    gen = bst.post_order()
+    for _ in range(bst.size()):
+        node = next(gen)
+        nodes.append(node)
+    assert nodes == [1, 3, 2, 4]
 
 
 def test_bst_full_post_order_trav(bst_full):
     """Test bst in post order trav with full bst."""
-    assert bst_full.post_order() == [3, 0, 6, 4, 9, 11, 100, 13, 12, 8]
+    nodes = []
+    gen = bst_full.post_order()
+    for _ in range(bst_full.size()):
+        node = next(gen)
+        nodes.append(node)
+    assert nodes == [3, 0, 6, 4, 9, 11, 100, 13, 12, 8]
 
 
 def test_bst_full_breadth_first_trav(bst_full):
     """Test for breadth first traversal."""
-    assert bst_full.breadth_first() == [8, 4, 12, 0, 6, 11, 13, 3, 9, 100]
+    nodes = []
+    gen = bst_full.breadth_first()
+    for _ in range(bst_full.size()):
+        node = next(gen)
+        nodes.append(node)
+    assert nodes == [8, 4, 12, 0, 6, 11, 13, 3, 9, 100]
 
-
-def test_bst_full_breadth_empty(bst):
-    """Test that proper error is raised with empty bst."""
-    with pytest.raises(ValueError):
-        bst.breadth_first()
 
 
