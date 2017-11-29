@@ -198,7 +198,12 @@ def test_bst_in_order_trav_line_left(bst):
     bst.insert(8)
     bst.insert(7)
     bst.insert(6)
-    assert bst.in_order() == [6, 7, 8]
+    nodes = []
+    gen = bst.in_order()
+    for _ in range(bst.size()):
+        node = next(gen)
+        nodes.append(node)
+    assert nodes == [6, 7, 8]
 
 
 def test_bst_in_order_trav(bst):
@@ -207,12 +212,22 @@ def test_bst_in_order_trav(bst):
     bst.insert(4)
     bst.insert(6)
     bst.insert(2)
-    assert bst.in_order() == [2, 4, 6, 8]
+    nodes = []
+    gen = bst.in_order()
+    for _ in range(bst.size()):
+        node = next(gen)
+        nodes.append(node)
+    assert nodes == [2, 4, 6, 8]
 
 
 def test_bst_full_in_order_trav(bst_full):
     """Test bst in order trav with full bst."""
-    assert bst_full.in_order() == [0, 3, 4, 6, 8, 9, 11, 12, 13, 100]
+    nodes = []
+    gen = bst_full.in_order()
+    for _ in range(bst_full.size()):
+        node = next(gen)
+        nodes.append(node)
+    assert nodes == [0, 3, 4, 6, 8, 9, 11, 12, 13, 100]
 
 
 def test_bst_in_order_trav_only_right(bst):
@@ -221,7 +236,12 @@ def test_bst_in_order_trav_only_right(bst):
     bst.insert(10)
     bst.insert(12)
     bst.insert(11)
-    assert bst.in_order() == [8, 10, 11, 12]
+    nodes = []
+    gen = bst.in_order()
+    for _ in range(bst.size()):
+        node = next(gen)
+        nodes.append(node)
+    assert nodes == [8, 10, 11, 12]
 
 
 def test_bst_pre_order_trav(bst):

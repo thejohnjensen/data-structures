@@ -115,25 +115,19 @@ class BST(object):
 
     def in_order(self):
         """Traverse the left subtree, visit root, then traverse the right."""
-        nodes = []
         current = self.root
         if current is None:
             raise ValueError("The bst is empty.")
 
         def _recur_in_order(current):
             """Recursively get tree nodes starting down the left."""
-            if current.left is None or current.left.val in nodes:
-                if current.val not in nodes:
-                    nodes.append(current.val)
-                if current.right and current.right.val not in nodes:
-                    _recur_in_order(current.right)
-                if current.parent:
-                    _recur_in_order(current.parent)
-                return
-            _recur_in_order(current.left)
-
-        _recur_in_order(current)
-        return nodes
+            if current:
+                for val in _recur_in_order(current.left):
+                    yield val
+                yield current.val
+                for val in _recur_in_order(current.right):
+                    yield val
+        return _recur_in_order(current)
 
     def pre_order(self):
         """
