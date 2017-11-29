@@ -147,3 +147,14 @@ The binary search tree is a usefull algorithm for storing data and quickly being
 `depth()`: O(1)
 `contains(val)`: O(log n)
 `balance()`: O(1)
+
+Traversals:
+* in_order: Traverse the nodes on the left, then root, then nodes on the right.
+* pre_order: Return the root, then the nodes on left as they are visited then the right.
+* post_order: Return the nodes on the left starting from the bottom up, then the right, then root.
+* breadth_first: Return all nodes on level before goint to the next level.
+
+`in_order()`: O(n)
+`pre_order()`: O(n)
+`post_order()`: O(n)
+`breadth_first()`: O(n) 
