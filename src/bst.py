@@ -198,6 +198,174 @@ class BST(object):
         for val in nodes:
             yield val
 
+    def delete(self, val):
+        """Method to delete a node that calls helper functions."""
+        node = self.search(val)
+
+        if node.left and node.right:
+            return self._delete_node_with_two_children(node)
+        elif node.left or node.right:
+            return self._delete_node_with_one_child(node)
+        else:
+            return self._delete_node_with_no_chlidren(node)
+
+    def _delete_node_with_no_chlidren(self, node):
+        """Function to delete a node with no children."""
+        if node.parent is None:
+            self.root = None
+        elif node.val > node.parent.val:
+            node.parent.right = None
+            node.parent = None
+        else:
+            node.parent.left = None
+            node.parent = None
+
+    def _delete_node_with_one_child(self, node):
+        """Funciton to delete node with one child."""
+        if node.parent is None:
+            if node.left:
+                self.root = node.left
+                node.left = None
+                self.root.parent = None
+            else:
+                self.root = node.right
+                node.right = None
+                self.root.parent = None
+        elif node.val < node.parent.val:
+            if node.left:
+                node.left.parent = node.parent
+                node.parent.left = node.left
+            else:
+                node.right.parent = node.parent
+                node.parent.left = node.right
+        else:
+            if node.left:
+                node.left.parent = node.parent
+                node.parent.right = node.left
+            else:
+                node.right.parent = node.parent
+                node.parent.right = node.right
+
+    def _delete_node_with_two_children(self, node):
+        """Function to delete node with two children."""
+        new_node = self._get_node_to_swap(node)
+        if node.parent is None:
+            if new_node is node.left:
+                node.right.parent = node.left
+                node.left.right = node.right
+                node.left.parent = None
+                self.root = node.left
+                node.right = None
+                node.left = None
+            else:
+                if new_node.left:
+                    new_node.parent.right = new_node.left
+                    new_node.left.parent = new_node.parent
+                    new_node.left = None
+                    new_node.parent = None
+                elif new_node.right:
+                    new_node.parent.left = new_node.right
+                    new_node.right.parent = new_node.parent
+                    new_node.right = None
+                    new_node.parent = None
+                node.right.parent = new_node
+                node.left.parent = new_node
+                new_node.parent = node.parent
+                new_node.left = node.left
+                new_node.right = node.right
+                self.root = new_node
+
+        elif node.val < node.parent.val:
+            new_node = self._get_node_to_swap(node)
+            if new_node is node.left:
+                node.parent.left = new_node
+                node.right.parent = new_node
+                new_node.parent = node.parent
+                new_node.right = node.right
+                node.parent = None
+                node.right = None
+                node.left = None
+            else:
+                if new_node.left:
+                    new_node.parent.right = new_node.left
+                    new_node.left.parent = new_node.parent
+                    new_node.left = None
+                    new_node.parent = None
+                elif new_node.right:
+                    new_node.parent.left = new_node.right
+                    new_node.right.parent = new_node.parent
+                    new_node.right = None
+                    new_node.parent = None
+                node.right.parent = new_node
+                node.left.parent = new_node
+                node.parent.left = new_node
+                new_node.parent = node.parent
+                new_node.left = node.left
+                new_node.right = node.right
+
+        else:
+            new_node = self._get_node_to_swap(node)
+            if new_node is node.left:
+                node.parent.right = new_node
+                node.right.parent = new_node
+                new_node.parent = node.parent
+                new_node.right = node.right
+                node.parent = None
+                node.right = None
+                node.left = None
+            else:
+                if new_node.left:
+                    new_node.parent.right = new_node.left
+                    new_node.left.parent = new_node.parent
+                    new_node.left = None
+                    new_node.parent = None
+                elif new_node.right:
+                    new_node.parent.left = new_node.right
+                    new_node.right.parent = new_node.parent
+                    new_node.right = None
+                    new_node.parent = None
+                node.right.parent = new_node
+                node.left.parent = new_node
+                node.parent.right = new_node
+                new_node.parent = node.parent
+                new_node.left = node.left
+                new_node.right = node.right
+
+    def _get_node_to_swap(self, node):
+        """
+        Get the deepest right node on the left sub tree or left most on.
+
+        the right sub tree.
+        """
+        left_depth = 0
+        right_depth = 0
+
+        if node.left.right:
+            current = node.left
+            while current.right:
+                left_depth += 1
+                current = current.right
+
+        if node.right.left:
+            current = node.right
+            while current.left:
+                right_depth += 1
+                current = current.left
+
+        if left_depth >= right_depth:
+            if left_depth == 0:
+                return node.left
+            else:
+                current = node.left
+                while current.right:
+                    current = current.right
+                return current
+        else:
+            current = node.right
+            while current.left:
+                current = current.left
+            return current
+
 
 if __name__ == '__main__':
     bst = BST()

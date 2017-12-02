@@ -51,7 +51,7 @@ def test_bst_error_(bst):
     """Test a bst with root and a node on left and right."""
     bst.insert(8)
     with pytest.raises(ValueError):
-            bst.insert(8)
+        bst.insert(8)
 
 
 def test_insert_bst_full_parents(bst_full):
@@ -302,4 +302,269 @@ def test_bst_full_breadth_first_trav(bst_full):
     assert nodes == [8, 4, 12, 0, 6, 11, 13, 3, 9, 100]
 
 
+def test_bst_delete_root_no_children(bst):
+    """."""
+    bst.insert(1)
+    assert bst.root.val == 1
+    bst.delete(1)
+    assert bst.root is None
 
+
+def test_bst_delete_left_child_with_no_children(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(6)
+    assert bst.root.val == 8
+    assert bst.root.left.val == 6
+    bst.delete(6)
+    assert bst.root.left is None
+
+
+def test_bst_delete_right_child_with_no_children(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(10)
+    assert bst.root.val == 8
+    assert bst.root.right.val == 10
+    bst.delete(10)
+    assert bst.root.right is None
+
+
+def test_bst_delete_node_after_deleting_child(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(10)
+    assert bst.root.val == 8
+    assert bst.root.right.val == 10
+    bst.delete(10)
+    assert bst.root.left is None
+    bst.delete(8)
+    assert bst.root is None
+
+
+def test_bst_delete_root_one_left_child(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(6)
+    bst.delete(8)
+    assert bst.root.val == 6
+    assert bst.root.parent is None
+    assert bst.search(8) is None
+
+
+def test_bst_delete_root_one_left_child_with_childrent(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(4)
+    bst.insert(3)
+    bst.insert(6)
+    bst.insert(5)
+    bst.delete(8)
+    assert bst.root.val == 4
+    assert bst.root.right.val == 6
+    assert bst.root.left.val == 3
+    assert bst.root.right.left.val == 5
+
+
+def test_bst_delete_root_one_right_child(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(10)
+    bst.delete(8)
+    assert bst.root.val == 10
+    assert bst.root.parent is None
+    assert bst.search(8) is None
+
+
+def test_bst_delete_node_with_left_child(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(6)
+    bst.insert(4)
+    bst.delete(6)
+    assert bst.root.val == 8
+    assert bst.root.left.val == 4
+    assert bst.root.left.parent.val == 8
+
+
+def test_bst_node_on_left_delete_node_with_right_child(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(6)
+    bst.insert(7)
+    bst.delete(6)
+    assert bst.root.val == 8
+    assert bst.root.left.val == 7
+    assert bst.root.left.parent.val == 8
+
+
+def test_bst_node_on_right_delete_node_with_right_child(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(10)
+    bst.insert(12)
+    bst.delete(10)
+    assert bst.root.val == 8
+    assert bst.root.right.val == 12
+    assert bst.root.right.parent.val == 8
+
+
+def test_bst_node_on_right_delete_node_with_left_child(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(10)
+    bst.insert(9)
+    bst.delete(10)
+    assert bst.root.val == 8
+    assert bst.root.right.val == 9
+    assert bst.root.right.parent.val == 8
+
+
+def test_bst_delete_root_two_children(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(10)
+    bst.insert(6)
+    bst.delete(8)
+    assert bst.root.val == 6
+    assert bst.root.left is None
+    assert bst.root.right.val == 10
+    assert bst.root.right.parent.val == 6
+    assert bst.search(8) is None
+
+
+def test_bst_delete_node_two_children_with_new_node_no_children(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(10)
+    bst.insert(6)
+    bst.insert(7)
+    bst.delete(8)
+    assert bst.root.val == 7
+    assert bst.root.left.val == 6
+    assert bst.root.right.val == 10
+    assert bst.root.right.parent.val == 7
+    assert bst.root.left.parent.val == 7
+    assert bst.search(8) is None
+
+
+def test_bst_delete_node_two_children_with_new_node_one_child(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(10)
+    bst.insert(5)
+    bst.insert(7)
+    bst.insert(6)
+    bst.insert(4)
+    bst.delete(8)
+    assert bst.root.val == 7
+    assert bst.root.left.val == 5
+    assert bst.root.left.right.val == 6
+    assert bst.root.left.right.parent.val == 5
+    assert bst.root.right.val == 10
+    assert bst.root.right.parent.val == 7
+    assert bst.root.left.parent.val == 7
+    assert bst.search(8) is None
+
+
+def test_bst_delete_node_two_children_with_new_node_right_one_child(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(12)
+    bst.insert(6)
+    bst.insert(10)
+    bst.insert(14)
+    bst.insert(11)
+    bst.delete(8)
+    assert bst.root.val == 10
+    assert bst.root.right.val == 12
+    assert bst.root.right.left.val == 11
+    assert bst.root.right.left.parent.val == 12
+    assert bst.root.left.val == 6
+    assert bst.root.right.parent.val == 10
+    assert bst.root.left.parent.val == 10
+    assert bst.search(8) is None
+
+
+def test_bst_delete_node_two_children(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(6)
+    bst.insert(7)
+    bst.insert(5)
+    bst.delete(6)
+    assert bst.root.val == 8
+    assert bst.root.left.val == 5
+    assert bst.root.left.right.val == 7
+    assert bst.root.left.right.parent.val == 5
+    assert bst.root.left.parent.val == 8
+    assert bst.search(6) is None
+
+
+def test_bst_delete_node_two_children_right_sub_tree(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(5)
+    bst.insert(7)
+    bst.insert(0)
+    bst.insert(6)
+    bst.delete(5)
+    assert bst.root.val == 8
+    assert bst.root.left.val == 6
+    assert bst.root.left.right.val == 7
+    assert bst.root.left.right.parent.val == 6
+    assert bst.root.left.parent.val == 8
+    assert bst.search(5) is None
+
+
+def test_bst_delete_node_two_children_left_sub_tree(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(5)
+    bst.insert(7)
+    bst.insert(0)
+    bst.insert(6)
+    bst.insert(1)
+    bst.insert(3)
+    bst.insert(2)
+    bst.delete(5)
+    assert bst.root.val == 8
+    assert bst.root.left.val == 3
+    assert bst.root.left.right.val == 7
+    assert bst.root.left.right.parent.val == 3
+    assert bst.root.left.parent.val == 8
+    assert bst.root.left.left.val == 0
+    assert bst.root.left.left.right.val == 1
+    assert bst.root.left.left.right.right.val == 2
+    assert bst.search(5) is None
+
+
+def test_bst_delete_two_children_on_right(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(6)
+    bst.insert(14)
+    bst.insert(12)
+    bst.insert(16)
+    bst.delete(14)
+    assert bst.root.right.val == 12
+
+
+def test_bst_delete_node_two_children_right_sub_tree_big(bst):
+    """."""
+    bst.insert(8)
+    bst.insert(5)
+    bst.insert(12)
+    bst.insert(14)
+    bst.insert(9)
+    bst.insert(10)
+    bst.insert(11)
+    bst.delete(12)
+    assert bst.root.val == 8
+    assert bst.root.right.val == 11
+    assert bst.root.right.left.val == 9
+    assert bst.root.right.left.parent.val == 11
+    assert bst.root.right.parent.val == 8
+    assert bst.root.right.right.val == 14
+    assert bst.root.right.left.right.val == 10
+    assert bst.search(12) is None
