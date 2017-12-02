@@ -158,3 +158,7 @@ Traversals:
 `pre_order()`: O(n)
 `post_order()`: O(n)
 `breadth_first()`: O(n) 
+
+BST Node Deletion:
+
+`delete(val)`: O(log n)
