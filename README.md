@@ -1,4 +1,6 @@
 # Data-Structures
+![alt image](https://travis-ci.org/thejohnjensen/data-structures.svg?branch=master)
+
 **Classic data structures in python.  Paired programming.**
 
 **Authors: Zach Taylor & John Jensen**
