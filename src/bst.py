@@ -8,6 +8,7 @@ class Node(object):
     def __init__(self, val, parent=None, left=None, right=None):
         """Initialize Node with the following params."""
         self.depth = 0
+        self.balance = 0
         self.parent = parent
         self.left = left
         self.right = right
@@ -366,6 +367,25 @@ class BST(object):
                 current = current.left
             return current
 
+    # def _balance_factor(self):
+    #     """."""
+    #     current = self.root
+    #     while current:
+            
+
+    # def _set_balance(self):
+    #     """."""
+    #     current = self.root
+
+    #     def _help_set_balance(current):
+    #         """."""
+    #         if current:
+    #             for val in _help_set_balance(current.left):
+                    
+                
+    #             for val in _help_set_balance(current.right):
+    #                 yield val
+    #     _help_set_balance(current)
 
 if __name__ == '__main__':
     bst = BST()

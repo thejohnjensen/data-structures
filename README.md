@@ -164,3 +164,14 @@ Traversals:
 BST Node Deletion:
 
 `delete(val)`: O(log n)
+
+**Hash Table**
+The hash table uses a hashing algorithm to randomize the location of data in a table. This creates a simple dictionary.
+
+`set(key, value)`: O(k) where k is the number of items in individual buckets.
+`get(key)`: O(k) where k is the number of items in individual buckets. 
+`hash()`: O(n) where n is length of key
+
+Hashing Algorithms:
+* Additivie: Adds the integer value of Unicode for each character. Similar permutations in same bucket.
+* Bernstein: Uses a factor of 33 to offset the Unicode value for each character resulting in a more random placement of data. Similar permutations can end up in different buckets.
