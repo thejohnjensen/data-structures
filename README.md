@@ -175,3 +175,12 @@ The hash table uses a hashing algorithm to randomize the location of data in a t
 Hashing Algorithms:
 * Additivie: Adds the integer value of Unicode for each character. Similar permutations in same bucket.
 * Bernstein: Uses a factor of 33 to offset the Unicode value for each character resulting in a more random placement of data. Similar permutations can end up in different buckets.
+
+
+**Trie**
+Tree of words linked with nodes containing the letters of the word.
+
+`insert(string)`: O(n) where n is length of string
+`contains(string)`: O(n) where n is length of string
+`size()`: O(1)
+`remove(string)`: O(n) where n is length of string
