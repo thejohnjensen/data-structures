@@ -1,6 +1,6 @@
 """Test Module for Trie."""
 from trie import Trie
-
+import pytest
 
 with open('/usr/share/dict/words', 'r') as word_list:
     words = word_list.read().split('\n')[::100]
@@ -53,3 +53,79 @@ def test_add_same_word_then_remove():
     assert t.contains('at')
     t.remove('at')
     assert not t.contains('at')
+
+
+def test_traverse_simple():
+    """Test traverse method."""
+    t = Trie()
+    t.insert('water')
+    t.insert('wash')
+    gen = t.traverse('wa')
+    trie_words = []
+    for _ in range(2):
+        trie_words.append(next(gen))
+    assert trie_words == ['water', 'wash']
+
+
+def test_traverse_big_start_with_ap():
+    """Test traverse method."""
+    t = Trie()
+    match_words = []
+    trie_words = []
+    for word in words:
+        t.insert(word)
+        if word[:2] == 'ap':
+            match_words.append(word)
+    gen = t.traverse('ap')
+    for _ in range(len(match_words)):
+        trie_words.append(next(gen))
+    assert trie_words == match_words
+
+
+def test_traverse_big_start_with_wat():
+    """Test traverse method."""
+    t = Trie()
+    match_words = []
+    trie_words = []
+    for word in words:
+        t.insert(word)
+        if word[:3] == 'wat':
+            match_words.append(word)
+    gen = t.traverse('wat')
+    for _ in range(len(match_words)):
+        trie_words.append(next(gen))
+    assert trie_words == match_words
+
+
+def test_traverse_big_start_no_start():
+    """Test traverse method."""
+    t = Trie()
+    trie_words = []
+    for word in words:
+        t.insert(word)
+    gen = t.traverse()
+    for _ in range(len(words)):
+        trie_words.append(next(gen))
+    for word in trie_words:
+        assert word in words
+
+
+def test_error_no_string_insert():
+    """Raise error when try to insert a non string."""
+    t = Trie()
+    with pytest.raises(TypeError):
+        assert t.insert(99)
+
+
+def test_error_no_string_contains():
+    """Raise error when try to run contains on non string."""
+    t = Trie()
+    with pytest.raises(TypeError):
+        assert t.contains(99)
+
+
+def test_error_no_string_remove():
+    """Raise error when try to run remove on non string."""
+    t = Trie()
+    with pytest.raises(TypeError):
+        assert t.remove(99)

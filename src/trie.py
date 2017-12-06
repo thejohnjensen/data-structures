@@ -24,6 +24,8 @@ class Trie(object):
 
     def insert(self, string):
         """Insert a new word into Trie."""
+        if not isinstance(string, str):
+            raise TypeError('Input must be a string.')
         current = self.root
         for ind, letter in enumerate(string):
             if letter in current.children:
@@ -37,6 +39,8 @@ class Trie(object):
 
     def contains(self, string):
         """Return True if string in Trie, else False."""
+        if not isinstance(string, str):
+            raise TypeError('Input must be a string.')
         contains = False
         current = self.root
         for ind, letter in enumerate(string):
@@ -53,6 +57,8 @@ class Trie(object):
 
     def remove(self, string):
         """Remvoe word from Trie."""
+        if not isinstance(string, str):
+            raise TypeError('Input must be a string.')
         contains = False
         current = self.root
         for ind, letter in enumerate(string):
@@ -65,3 +71,28 @@ class Trie(object):
                         self.num_words -= 1
         if contains is False:
             raise AttributeError('String is not in Trie.')
+
+    def traverse(self, start=''):
+        """Traverse trie and return a generator for all words in trie."""
+        if not isinstance(start, str):
+            raise TypeError('Input must be a string.')
+        tokens = []
+        current = self.root
+        for letter in start:
+            if letter in current.children:
+                current = current.children[letter]
+            else:
+                yield tokens
+
+        def _recursive(current):
+            """Recursive helper for trie."""
+            for child in current.children:
+                if current.children[child].data:
+                    tokens.append(current.children[child].data)
+                _recursive(current.children[child])
+        _recursive(current)
+        for token in tokens:
+            yield token
+
+
+
