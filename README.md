@@ -178,9 +178,10 @@ Hashing Algorithms:
 
 
 **Trie**
-Tree of words linked with nodes containing the letters of the word.
+Tree of words linked with nodes containing the letters of the word. 
 
 `insert(string)`: O(n) where n is length of string
 `contains(string)`: O(n) where n is length of string
 `size()`: O(1)
 `remove(string)`: O(n) where n is length of string
+`traverse(string)`: O(k + n) where k is length of string parameter and n is length of all words in trie.
