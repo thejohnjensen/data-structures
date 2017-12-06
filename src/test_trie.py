@@ -64,7 +64,8 @@ def test_traverse_simple():
     trie_words = []
     for _ in range(2):
         trie_words.append(next(gen))
-    assert trie_words == ['water', 'wash']
+    for word in trie_words:
+        assert word in ['wash', 'water']
 
 
 def test_traverse_big_start_with_ap():
@@ -79,7 +80,8 @@ def test_traverse_big_start_with_ap():
     gen = t.traverse('ap')
     for _ in range(len(match_words)):
         trie_words.append(next(gen))
-    assert trie_words == match_words
+    for word in trie_words:
+        assert word in match_words
 
 
 def test_traverse_big_start_with_wat():
