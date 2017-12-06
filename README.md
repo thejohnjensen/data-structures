@@ -185,3 +185,9 @@ Tree of words linked with nodes containing the letters of the word.
 `size()`: O(1)
 `remove(string)`: O(n) where n is length of string
 `traverse(string)`: O(k + n) where k is length of string parameter and n is length of all words in trie.
+
+
+**Bubble Sort**
+Bubble sort is a bad sorting algorithm, very bad. Enough said.
+
+`bubble_sort(list)`: O(n^2)
