@@ -191,3 +191,13 @@ Tree of words linked with nodes containing the letters of the word.
 Bubble sort is a bad sorting algorithm, very bad. Enough said.
 
 `bubble_sort(list)`: O(n^2)
+
+**Insertion Sort**
+Insertion sort compares a current value against each value to its left until it finds the correct spot.
+
+`insertion(list)`: O(n^2)
+
+**Merge Sort**
+Merge sort divides the list into smaller lists and then sorts each sub list. Then it rebuilds the list comparing each sub list.
+
+`merge_sort(list)`: O(nlogn)
