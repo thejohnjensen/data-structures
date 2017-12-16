@@ -34,7 +34,7 @@ A stack is a data structure where elements are stacked on top of one another. It
 `def pop(self):` 
 
 **Doubly Linked List**
-Doubly linked list is a linked data structure that has a link to previous and next nodes from inside of it.
+Doubly linked list is a linked data structure that has a link to previous and next nodes from inside of it. Also implemented in JavaScript
 
 Time Complexity:
 
