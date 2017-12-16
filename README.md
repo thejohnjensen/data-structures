@@ -6,7 +6,7 @@
 **Authors: Zach Taylor & John Jensen**
 
 **Linked List**
-Linked list is a linked data structure with only one pointer to the next node.
+Linked list is a linked data structure with only one pointer to the next node. Implemented in Python and JavaScript
 
 `def push(self, data):` O(1)
 
