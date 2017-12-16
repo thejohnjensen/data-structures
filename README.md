@@ -175,3 +175,34 @@ The hash table uses a hashing algorithm to randomize the location of data in a t
 Hashing Algorithms:
 * Additivie: Adds the integer value of Unicode for each character. Similar permutations in same bucket.
 * Bernstein: Uses a factor of 33 to offset the Unicode value for each character resulting in a more random placement of data. Similar permutations can end up in different buckets.
+
+
+**Trie**
+Tree of words linked with nodes containing the letters of the word. 
+
+`insert(string)`: O(n) where n is length of string
+`contains(string)`: O(n) where n is length of string
+`size()`: O(1)
+`remove(string)`: O(n) where n is length of string
+`traverse(string)`: O(k + n) where k is length of string parameter and n is length of all words in trie.
+
+
+**Bubble Sort**
+Bubble sort is a bad sorting algorithm, very bad. Enough said.
+
+`bubble_sort(list)`: O(n^2)
+
+**Insertion Sort**
+Insertion sort compares a current value against each value to its left until it finds the correct spot.
+
+`insertion(list)`: O(n^2)
+
+**Merge Sort**
+Merge sort divides the list into smaller lists and then sorts each sub list. Then it rebuilds the list comparing each sub list.
+
+`merge_sort(list)`: O(nlogn)
+
+**Quick Sort**
+Divide and conquer sorting algorithm.
+
+`quick_sort(list)`: O(nlogn) -> worst case O(n^2)
