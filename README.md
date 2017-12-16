@@ -201,3 +201,8 @@ Insertion sort compares a current value against each value to its left until it 
 Merge sort divides the list into smaller lists and then sorts each sub list. Then it rebuilds the list comparing each sub list.
 
 `merge_sort(list)`: O(nlogn)
+
+**Quick Sort**
+Divide and conquer sorting algorithm.
+
+`quick_sort(list)`: O(nlogn) -> worst case O(n^2)

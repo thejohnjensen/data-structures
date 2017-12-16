@@ -367,25 +367,22 @@ class BST(object):
                 current = current.left
             return current
 
-    # def _balance_factor(self):
-    #     """."""
-    #     current = self.root
-    #     while current:
+    def max_depth(self):
+        curr = self.root
+        def _helper(curr):
+            if self.root is None:
+                return 0
+            max_d_left = _helper(curr.left)
+            max_d_right = _helper(curr.right)
+            # import pdb; pdb.set_trace()
+            if max_d_left > max_d_right:
+                return max_d_left + 1
+            else:
+                return max_d_right + 1
+        return _helper(curr)
+
             
 
-    # def _set_balance(self):
-    #     """."""
-    #     current = self.root
-
-    #     def _help_set_balance(current):
-    #         """."""
-    #         if current:
-    #             for val in _help_set_balance(current.left):
-                    
-                
-    #             for val in _help_set_balance(current.right):
-    #                 yield val
-    #     _help_set_balance(current)
 
 if __name__ == '__main__':
     bst = BST()
