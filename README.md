@@ -206,3 +206,8 @@ Merge sort divides the list into smaller lists and then sorts each sub list. The
 Divide and conquer sorting algorithm.
 
 `quick_sort(list)`: O(nlogn) -> worst case O(n^2)
+
+**Radix Sort**
+Sorting algorithm that sorts based on individual digits in the same position.
+
+`radix_sort(list)`: O(n*w) where w is the length of the longest number
