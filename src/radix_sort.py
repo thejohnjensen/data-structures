@@ -49,7 +49,7 @@ def radix_sort(numbers):
 
     for str_rev_num in sorting_list:
         final_list.append(int(str_rev_num[::-1]))
-    print(final_list)
+    return final_list
 
 
 if __name__ == '__main__':
