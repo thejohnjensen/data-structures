@@ -2,7 +2,9 @@
 
 
 def radix_sort(numbers):
-    """."""
+    """Radix sort."""
+    if not isinstance(numbers, (list, tuple)):
+        raise TypeError('Please input a list or tuple.')
     sorting_list = []
     final_list = []
     buckets = {
