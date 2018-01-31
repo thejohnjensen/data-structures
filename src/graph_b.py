@@ -1,47 +1,39 @@
 """Graph created with seperate classes for Node and Graph."""
-
-
-class Node(object):
-    """Node for graph."""
-
-    def __init__(self, data):
-        """."""
-        self.data = data
-        self.nodes = []
-
-    def add_edge(self, end):
-        """."""
-        self.nodes.append(end)
+from collections import defaultdict
 
 
 class Graph(object):
-    """Graph data structure."""
+    """Undirected Graph data structure."""
 
     def __init__(self):
-        """."""
-        self.graph = []
+        """Init with defualt dict type set."""
+        self.graph = defaultdict(set)
 
     def add_node(self, data):
-        """."""
-        self.graph.append(Node(data))
+        """Add the node to the graph and create set."""
+        self.graph[data]
 
-    def add_edge(self, start, end):
+    def add_edge(self, node_a, node_b):
         """Add edge, if end node not in graph add it."""
-        end_node = ''
-        found = False
-        for node in self.graph:
-            if node.data == end:
-                end_node = node
-                found = True
+        self.graph[node_a].add(node_b)
+        self.graph[node_b].add(node_a)
+    
+    def depth_first_search(self):
+        """."""
+        pass
 
-        if not found:
-            end_node = Node(end)
-            self.graph.append(end_node)
+    def breadth_first_search(self):
+        """."""
+        pass
 
-        for node in self.graph:
-            if node.data == start:
-                node.add_edge(end_node)
-                break
+    def dykstras(self):
+        """."""
+        pass
+
+    def bellman_ford(self):
+        """."""
+
+
 
 
 
