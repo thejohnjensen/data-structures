@@ -153,3 +153,11 @@ def bst_full():
     bst.insert(3)
     bst.insert(100)
     return bst
+
+
+@pytest.fixture()
+def graph_b():
+    """Empty graph."""
+    from graph_b import Graph
+    g = Graph()
+    return g
