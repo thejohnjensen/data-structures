@@ -1,9 +1,10 @@
 """Graph created with seperate classes for Node and Graph."""
 from collections import defaultdict
+import Queue
 
 
 class Graph(object):
-    """Undirected Graph data structure."""
+    """Directed Graph data structure."""
 
     def __init__(self):
         """Init with defualt dict type set."""
@@ -13,18 +14,26 @@ class Graph(object):
         """Add the node to the graph and create set."""
         self.graph[data]
 
-    def add_edge(self, node_a, node_b):
+    def add_edge(self, start_node, end_node):
         """Add edge, if end node not in graph add it."""
-        self.graph[node_a].add(node_b)
-        self.graph[node_b].add(node_a)
-    
+        self.graph[start_node].add(end_node)
+
     def depth_first_search(self):
         """."""
         pass
 
-    def breadth_first_search(self):
+    def breadth_first_search(self, start):
         """."""
-        pass
+        que = Queue.Queue()
+        visited = []
+        que.put(start)
+        while not que.empty():
+            node = que.get()
+            visited.append(node)
+            for i in self.graph[node]:
+                if i not in visited:
+                    que.put(i)
+        return visited
 
     def dykstras(self):
         """."""
