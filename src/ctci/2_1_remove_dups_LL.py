@@ -20,8 +20,29 @@ def remove_dups(ll):
     return ll.display()
 
 
+def alternating_split(head):
+    """."""
+    if head is None:
+        return None
+    forward = head.next
+    back = head
+    first = back
+    second = forward
+    while forward and back:
+        if forward.next is None or back.next is None:
+            back.next = None
+            forward.next = None
+            break
+        back.next = forward.next
+        back = back.next
+        forward.next = back.next
+        forward = back.next
+
+    return (first, second)
+
+
 if __name__ == '__main__':
     ll = LinkedList([1, 2, 3, 4, 5, 6, 3, 2, 1])
+    ll2 = LinkedList([2, 1])
+    split = alternating_split(ll2.head)
     print(remove_dups(ll))
-
-
