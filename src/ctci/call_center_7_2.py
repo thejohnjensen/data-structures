@@ -22,7 +22,7 @@ class Employees(object):
         self.employee_count = 0
 
 
-class Director(Employees):
+class Director(object):
     """."""
 
     def __init__(self):
