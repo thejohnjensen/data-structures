@@ -1,43 +1,30 @@
-"""Design a call center with 3 types of employees."""
+"""Module for call center."""
 
 
 class CallCenter(object):
-    """Creates the call center object."""
+    """
+    Call Center queues up the calls and has an overall record of
+    the employees and which are on calls.
 
-    def __init__(self, name=None, address=None):
-        """."""
-        self.name = name
-        self.address = address
+    Attributes:
+        Dictionary with the amount of each employee type.
 
+    Methods:
+        Receive call, add to queue.
+        Return initial voice message, maybe with spot in queue if not available
+        Dispatch to first, lowest level employee.
+    """
 
-class Employees(object):
-    """."""
-
-    def __init__(self, call_center):
-        """."""
-        if isinstance(call_center, CallCenter):
-            self.call_center = call_center
-        else:
-            raise TypeError('Call center must be a call center object')
-        self.employee_count = 0
-
-
-class Director(object):
-    """."""
-
-    def __init__(self):
-        # super(Employees, self).__init__()
-        # how to best connect each director to employees of call center?
-        # each director is an employee
-        # reference cards in a deck, multiple instances
-        pass
-
-
-class Manager(Employees):
-    """."""
     pass
 
 
-class Respondent(Employees):
+class Call(object):
     """."""
+
     pass
+
+
+class Employee(object):
+    """."""
+
+#  class for each type
