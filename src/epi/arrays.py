@@ -31,6 +31,46 @@ def max_stock_sale(prices):
     return max_sales
 
 
+import random
+
+
+def sample(a, s):
+    l = len(a) - 1
+    indxs = set()
+    for _ in range(s):
+        rand = random.randrange(l)
+        while rand in indxs:
+            rand = random.randrange(l)
+        indxs.add(rand)
+    output = []
+    for i in indxs:
+        output.append(a[i])
+    a[:] = output
+    # for i in range(s):
+    #     import pdb; pdb.set_trace()
+    #     rand = random.randint(i, l)
+    #     a[i], a[rand] = a[rand], a[i]
+    # A[:] = random.sample(A, k)
+
+
+def quicksort(l):
+    """
+    TODO: implement recursion.
+    """
+    piv = len(l) - 1
+    wall = 0
+
+    for j in range(len(l)):
+        if l[j] < l[piv]:
+            # swap l[j] with wall value
+            l[j], l[wall] = l[wall], l[j]
+            # increment wall
+            wall += 1
+    # swap piv with wall
+    l[wall], l[piv] = l[piv], l[wall]
+    return l
+
+
 class Test(unittest.TestCase):
     def test_dutch_flag_part(self):
         self.assertEqual(dutch_flag_part([0, 1, 2, 0, 1], 3), [0, 0, 1, 2, 1])
